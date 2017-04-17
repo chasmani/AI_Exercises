@@ -75,8 +75,11 @@ class State:
 			return False
 
 
-def simple_strategy(fringe):
+def breadth_first_search(fringe):
 	return fringe[0]
+
+def depth_first_search(fringe):
+	return fringe[-1]
 
 
 def tree_search(problem, strategy):

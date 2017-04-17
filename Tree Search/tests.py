@@ -1,7 +1,7 @@
 import unittest
 
 from driver import State
-from driver import tree_search, simple_strategy
+from driver import tree_search, breadth_first_search, depth_first_search
 
 
 class TestState(unittest.TestCase):
@@ -100,25 +100,60 @@ class TestTreeSearch(unittest.TestCase):
 		self.problem_4 = [1,0,2,3,4,5,6,7,8]
 		self.problem_5 = [3,1,2,0,4,5,6,7,8]
 
-	def test_2_rows_solutions(self):
+	def test_2_rows_solutions_bfs(self):
 
-		solution_1 = tree_search(self.problem_1, simple_strategy)
+		solution_1 = tree_search(self.problem_1, breadth_first_search)
 		self.assertEqual(solution_1.history, ["Left"])		
 
-		solution_2 = tree_search(self.problem_2, simple_strategy)
+		solution_2 = tree_search(self.problem_2, breadth_first_search)
 		self.assertEqual(solution_2.history, [])
 		
-	def test_3_rows_solutions(self):
+	def test_3_rows_solutions_bfs(self):
 
-		solution_3 = tree_search(self.problem_3, simple_strategy)
+		solution_3 = tree_search(self.problem_3, breadth_first_search)
 		self.assertEqual(solution_3.history, [])
 
-		solution_4 = tree_search(self.problem_4, simple_strategy)
+		solution_4 = tree_search(self.problem_4, breadth_first_search)
 		self.assertEqual(solution_4.history, ["Left"])
 
-		solution_5 = tree_search(self.problem_5, simple_strategy)
+		solution_5 = tree_search(self.problem_5, breadth_first_search)
 		self.assertEqual(solution_5.history, ["Up"])
 
+
+	def test_2_rows_solutions_dfs(self):
+
+		solution_1 = tree_search(self.problem_1, depth_first_search)
+		self.assertEqual(solution_1.history, ["Left"])		
+
+		solution_2 = tree_search(self.problem_2, depth_first_search)
+		self.assertEqual(solution_2.history, [])
+
+
+	def test_2_rows_solutions_dfs(self):
+
+		solution_1 = tree_search(self.problem_1, depth_first_search)
+		self.assertEqual(solution_1.history, ["Left"])		
+
+		solution_2 = tree_search(self.problem_2, depth_first_search)
+		self.assertEqual(solution_2.history, [])
+
+		
+	def test_3_rows_solutions_dfs(self):
+
+		solution_3 = tree_search(self.problem_3, depth_first_search)
+		self.assertEqual(solution_3.history, [])
+
+		'''
+		These take too long and too much space - process gets killed after about a minute whe run in terminal. 
+		Makes sense - DFS will miss the solution to move left, because that is not the last node created. 
+		It will instead go right first and then just keep searching deeper and deeper, doesn't find a solution.
+		solution_4 = tree_search(self.problem_4, depth_first_search)
+		self.assertEqual(solution_4.history, ["Left"])
+
+		
+		solution_5 = tree_search(self.problem_5, breadth_first_search)
+		self.assertEqual(solution_5.history, ["Up"])
+		'''
 
 if __name__=="__main__":
 	unittest.main()
